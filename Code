@@ -1,0 +1,35 @@
+# Import necessary libraries
+import matplotlib.pyplot as plt
+import numpy as np
+import pandas as pd
+
+# Data
+data = {
+    'Parameter': [
+        'pH', 'Conductivity (uS/cm)', 'Turbidity NTU', 'Total Hardness (mg/L)',
+        'Total Alkalinity (mg/L)', 'Chloride (mg/L)', 'Total suspended solids (mg/L)',
+        'Total dissolved solids (mg/L)', 'Total solids (mg/L)', 'Nitrate (mg/L)',
+        'Sulphate (mg/L)', 'Calcium (mg/L)', 'Chlorine', 'Magnessium (mg/L)',
+        'Iron (mg/L)', 'Lead (mg/L)', 'Copper (mg/L)', 'Silica (mg/L)'
+    ],
+    'BH1': [6.2, 133, 1, 13, 18.69, 104.25, 35, 94, 129, 2.32, 2.12, 6.01, 0, 3, 0.251, 0.001, 0.28, 0.18],
+    'BH2': [6.2, 150, 1.9, 17, 20.69, 125.25, 35, 96, 133, 2.4, 2.16, 8.01, 0, 5, 0.311, 0.001, 0.3, 0.18],
+    'BH3': [6.2, 133, 1, 25, 18.69, 115.25, 32, 118, 250, 3.42, 3.14, 7.01, 0, 6.02, 0.43, 0.003, 0.212, 0.18],
+    'BH4': [6.42, 160, 1, 50, 35, 130, 45, 130, 130, 5, 3.5, 10, 0, 5, 0.421, 0.001, 0.28, 0.18],
+    'BH5': [6.2, 126, 1.5, 20, 30.69, 112.25, 35, 100, 130, 3.32, 3.12, 10.01, 0, 5, 0.401, 0.002, 0.28, 2.18],
+    'WHO(2011)': [7.5, 1000, 5, 100, 200, 250, 30, 500, 500, 10, 250, 70, 0.2, 30, 0.3, 0.1, 1, 40]
+}
+
+# Convert to DataFrame
+df = pd.DataFrame(data)
+
+# Plot each parameter
+for i, parameter in enumerate(df['Parameter']):
+    plt.figure(figsize=(10, 6))
+    plt.bar(df.columns[1:], df.iloc[i, 1:], color=['skyblue' if col != 'WHO(2011)' else 'orange' for col in df.columns[1:]])
+    plt.title(f'Comparison of {parameter}', fontsize=14)
+    plt.ylabel(parameter, fontsize=12)
+    plt.xlabel('Sample', fontsize=12)
+    plt.xticks(rotation=45)
+    plt.tight_layout()
+    plt.show()
